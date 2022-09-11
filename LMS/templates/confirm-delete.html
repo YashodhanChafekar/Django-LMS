@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+    #id_name, #id_isbn, #id_authors, #id_publisher{
+        width: 1000px;
+        height: 40px;
+        border-radius: 5px;
+        background-color: black;
+        color: white;
+        margin-left: 20px;
+    }
+</style>
+
+
+
+<form method="post">
+    {% csrf_token %}
+    <div style=" margin-top: 100px; background-color: black; padding: 30px; opacity: 0.8;">
+
+        <span><i style="margin-right: 10px;" class="fa">&#xf02d;</i> Title</span> 
+        <h2 style="margin:20px ;">{{book.name}}</h2>
+        
+        <span><i style="margin-right: 7px;" class="fa">&#xf2c3;</i>ISBN</span> 
+        <h2 style="margin:20px ;">{{book.isbn}}</h2>
+        
+        <span><i style="margin-right: 10px;" class="fa">&#xf040;</i>Authors</span> 
+        <h2 style="margin:20px ;">{{book.authors}}</h2>
+        
+        <span><i style="margin-right: 10px;"  class="fa fa-paperclip" aria-hidden="true"></i>Publisher</span> 
+        <h2 style="margin:20px ;">{{book.publisher}}</h2>
+        
+
+        
+
+        <br>
+        <a href="{%url 'books'%}" class="btn btn-outline-light" style="margin-top: 30px; padding: 10px; margin-left: 20px;">Back</a>
+        <input  type="submit" class="btn btn-danger" value="Confirm" style="margin-top: 30px; padding: 10px; margin-left: 20px;">
+    </div>
+    
+
+
+    
+
+</form>
+
+
+{% endblock %}
+

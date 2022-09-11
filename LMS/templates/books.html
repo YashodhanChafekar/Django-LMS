@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+
+{% block nav %}
+<div style="margin-left:50px;">
+    {% if request.user.is_authenticated %}
+        <h5>Welcome, Admin: <span>{{request.user}}</span> <span style="margin-left:10px;"><a class="btn btn-outline-danger" style="color:white ;" href="{% url 'logout' %}">LogOut</a></span></h5>
+
+        <h5><a class="btn btn-outline-light" href="{% url 'add-book' %}"> + ADD BOOK</a></h5>
+
+        
+    {% else %}
+    <h5>Welcome, Student. Search for your Desired books. <span style="margin-left:30px;"></span></h5>
+    <a class="btn btn-outline-danger" style="color:white ;" href="{% url 'login' %}">Only, Admin Login/Register</a>
+
+    {% endif %}
+</div>
+
+<form class="form-inline my-2 my-lg-0" style="margin-left: 100px; display: flex; ">
+    <input class="form-control mr-sm-2" type="search" placeholder="Search Books by Title" aria-label="Search" name="search-area" value="{{search_input}}"  style="width: 400px;">
+    <button class="btn btn-success my-2 my-sm-0" style="margin-left:20px;"  type="submit">Search</button>
+</form>
+{%  endblock %}
+
+    
+
+{% block content %}
+
+<div>
+
+<div class="container" style="margin-top:80px; overflow-x: scroll;">
+    
+
+
+
+    <div style="display:flex;height: 600px;" >
+
+        {% for book in books %}
+        <div class="books" id="books" style="flex: 2 0 33% ;width:80%; height: 80% ;background-color: black; opacity: 0.8 ;padding: 20px; border-radius: 20px; margin: 10px; margin-top: 80px;"> 
+            <div style="width: 100% ; height:60%">
+                <div style="margin:5px;">
+                    <span><i style="margin-right: 10px;" class="fa">&#xf02d;</i> Title</span> 
+                    <h3 style="margin-left: 15px ;">{{book.name}}</h3>
+                </div>
+                <div style="margin:5px;">
+                    <span><i style="margin-right: 7px;" class="fa">&#xf2c3;</i>ISBN</span> 
+                    <h4 style="margin-left: 15px ;">{{book.isbn}}</h4>
+                </div>
+                <div style="margin:5px;">
+                <span><i style="margin-right: 10px;" class="fa">&#xf040;</i>Authors</span> 
+                <h4 style="margin-left: 15px ;">{{book.authors}}</h4>
+               </div>
+               <div style="margin:5px;">
+                    <span><i style="margin-right: 10px;"  class="fa fa-paperclip" aria-hidden="true"></i>Publisher</span>  
+                    <h4 style="margin-left: 15px ;">{{book.publisher}}</h4>
+                </div>
+                
+            </div>
+            
+            {% if request.user.is_authenticated %}
+
+                <div style="margin-top: 80px ;">
+                    <span style="margin-left:20px;">
+                        <a  class="btn btn-outline-primary" href="{% url 'update-book' book.id %}" style="width:80px;color: white; font-size: 20px;">Edit</a>
+                    </span>
+                    
+                    <span style="margin-left:20px;">
+                        <a  class="btn btn-outline-danger"  href="{% url 'delete-book' book.id %}" style="width:80px;color: white; font-size: 20px;">Delete</a>
+                    </span>
+                </div>
+            {% endif %}
+        </div>
+        <div>
+                
+        </div>
+    
+    {% empty %}
+    
+    <h1 style="margin-top: 80px; margin-left: 100px;">No Books Found</h1>
+    
+    
+    
+    {% endfor %}
+    </div>  
+
+    
+
+</div> 
+
+</div>
+
+
+
+
+{% endblock content %}
+
+
+
+
+
+
+

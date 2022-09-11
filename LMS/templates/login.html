@@ -1,0 +1,45 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+    #id_username, #id_password{
+        width: 1000px;
+        height: 40px;
+        border-radius: 5px;
+        background-color: black;
+        color: white;
+        margin-left: 20px;
+    }
+</style>
+
+
+
+<form method="post" action="{% url 'login' %}">
+    {% csrf_token %}
+    <div style=" margin-top: 100px; background-color: black; padding: 30px; opacity: 0.8;">
+        <h3 style="margin:20px ;">Hello Admin, Enter Your Email Address:</h3>
+        <span>{{form.username}}</span>
+
+        <h3 style="margin:20px ;">Enter Admin Password:</h3>
+        <span>{{form.password}}</span>
+
+        <br>
+        <a href="{%url 'books'%}" class="btn btn-outline-light" style="margin-top: 50px; padding: 10px; margin-left: 20px;">Back</a>
+        <input  type="submit" class="btn btn-success" value="Login" style="margin-top: 50px; padding: 10px; margin-left: 20px;">
+        <a href="{% url 'register' %}" class="btn btn-primary" style="margin-top: 50px; padding: 10px; margin-left: 20px;">Register</a>
+        
+        <div style="color:white">
+            <p>{{form.errors}}</p>
+        </div>
+    </div>
+    
+
+
+    
+
+</form>
+
+
+{% endblock %}
